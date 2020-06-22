@@ -1,6 +1,6 @@
-%REM ********************************************************************
-%REM Create the REGIONS table to hold region information for locations
-%REM HR.LOCATIONS table has a foreign key to this table.
+--REM ********************************************************************
+--REM Create the REGIONS table to hold region information for locations
+--REM HR.LOCATIONS table has a foreign key to this table.
        
 CREATE TABLE regions
    ( region_id NUMBER 
@@ -13,10 +13,10 @@ ALTER TABLE regions
          ADD ( CONSTRAINT reg_id_pk
    PRIMARY KEY (region_id)
    ) ;
-%REM ********************************************************************
-%REM Create the COUNTRIES table to hold country information for customers
-%REM and company locations. 
-%REM OE.CUSTOMERS table and HR.LOCATIONS have a foreign key to this table.
+--REM ********************************************************************
+--REM Create the COUNTRIES table to hold country information for customers
+--REM and company locations. 
+--REM OE.CUSTOMERS table and HR.LOCATIONS have a foreign key to this table.
        
 CREATE TABLE countries 
    ( country_id CHAR(2) 
@@ -32,9 +32,9 @@ ALTER TABLE countries
    FOREIGN KEY (region_id)
    REFERENCES regions(region_id) 
    ) ;
-%REM ********************************************************************
-%REM Create the LOCATIONS table to hold address information for company departments.
-%REM HR.DEPARTMENTS has a foreign key to this table.
+--REM ********************************************************************
+--REM Create the LOCATIONS table to hold address information for company departments.
+--REM HR.DEPARTMENTS has a foreign key to this table.
        
 CREATE TABLE locations
    ( location_id NUMBER(4)
@@ -54,17 +54,17 @@ ALTER TABLE locations
    FOREIGN KEY (country_id)
    REFERENCES countries(country_id) 
    ) ;
-%REM Useful for any subsequent addition of rows to locations table
-%REM Starts with 3300
+--REM Useful for any subsequent addition of rows to locations table
+--REM Starts with 3300
 CREATE SEQUENCE locations_seq
    START WITH 3300
-   INC%REMENT BY 100
+   INC--REMENT BY 100
    MAXVALUE 9900
    NOCACHE
    NOCYCLE;
-%REM ********************************************************************
-%REM Create the DEPARTMENTS table to hold company department information.
-%REM HR.EMPLOYEES and HR.JOB_HISTORY have a foreign key to this table.
+--REM ********************************************************************
+--REM Create the DEPARTMENTS table to hold company department information.
+--REM HR.EMPLOYEES and HR.JOB_HISTORY have a foreign key to this table.
        
 CREATE TABLE departments
    ( department_id NUMBER(4)
@@ -82,17 +82,17 @@ ALTER TABLE departments
    FOREIGN KEY (location_id)
    REFERENCES locations (location_id)
    ) ;
-%REM Useful for any subsequent addition of rows to departments table
-%REM Starts with 280 
+--REM Useful for any subsequent addition of rows to departments table
+--REM Starts with 280 
 CREATE SEQUENCE departments_seq
    START WITH 280
-   INC%REMENT BY 10
+   INC--REMENT BY 10
    MAXVALUE 9990
    NOCACHE
    NOCYCLE;
-%REM ********************************************************************
-%REM Create the JOBS table to hold the different names of job roles within the company.
-%REM HR.EMPLOYEES has a foreign key to this table.
+--REM ********************************************************************
+--REM Create the JOBS table to hold the different names of job roles within the company.
+--REM HR.EMPLOYEES has a foreign key to this table.
        
 CREATE TABLE jobs
    ( job_id VARCHAR2(10)
@@ -107,10 +107,10 @@ ALTER TABLE jobs
          ADD ( CONSTRAINT job_id_pk
    PRIMARY KEY(job_id)
    ) ;
-%REM ********************************************************************
-%REM Create the EMPLOYEES table to hold the employee personnel 
-%REM information for the company.
-%REM HR.EMPLOYEES has a self referencing foreign key to this table.
+--REM ********************************************************************
+--REM Create the EMPLOYEES table to hold the employee personnel 
+--REM information for the company.
+--REM HR.EMPLOYEES has a self referencing foreign key to this table.
        
 CREATE TABLE employees
    ( employee_id NUMBER(6)
@@ -155,18 +155,18 @@ ALTER TABLE departments
    REFERENCES employees (employee_id)
    ) ;
        
-%REM Useful for any subsequent addition of rows to employees table
-%REM Starts with 207 
+--REM Useful for any subsequent addition of rows to employees table
+--REM Starts with 207 
        
 CREATE SEQUENCE employees_seq
    START WITH 207
-   INC%REMENT BY 1
+   INC--REMENT BY 1
    NOCACHE
    NOCYCLE;
-%REM ********************************************************************
-%REM Create the JOB_HISTORY table to hold the history of jobs that 
-%REM employees have held in the past.
-%REM HR.JOBS, HR_DEPARTMENTS, and HR.EMPLOYEES have a foreign key to this table.
+--REM ********************************************************************
+--REM Create the JOB_HISTORY table to hold the history of jobs that 
+--REM employees have held in the past.
+--REM HR.JOBS, HR_DEPARTMENTS, and HR.EMPLOYEES have a foreign key to this table.
        
 CREATE TABLE job_history
    ( employee_id NUMBER(6)
@@ -196,10 +196,10 @@ ALTER TABLE job_history
    FOREIGN KEY (department_id)
    REFERENCES departments
    ) ;
-%REM ********************************************************************
-%REM Create the EMP_DETAILS_VIEW that joins the employees, jobs, 
-%REM departments, jobs, countries, and locations table to provide details
-%REM about employees.
+--REM ********************************************************************
+--REM Create the EMP_DETAILS_VIEW that joins the employees, jobs, 
+--REM departments, jobs, countries, and locations table to provide details
+--REM about employees.
        
 CREATE OR REPLACE VIEW emp_details_view
    (employee_id,
@@ -251,7 +251,7 @@ CREATE OR REPLACE VIEW emp_details_view
  
 COMMIT;
 ALTER SESSION SET NLS_LANGUAGE=American; 
-%REM ***************************insert data into the REGIONS table
+--REM ***************************insert data into the REGIONS table
 INSERT INTO regions VALUES 
    ( 1
    , 'Europe' 
@@ -268,7 +268,7 @@ INSERT INTO regions VALUES
    ( 4
    , 'Middle East and Africa' 
    );
-%REM ***************************insert data into the COUNTRIES table
+--REM ***************************insert data into the COUNTRIES table
 INSERT INTO countries VALUES 
    ( 'IT'
    , 'Italy'
@@ -395,7 +395,7 @@ INSERT INTO countries VALUES
    , 1 
    );
        
-%REM ***************************insert data into the LOCATIONS table       
+--REM ***************************insert data into the LOCATIONS table       
 INSERT INTO locations VALUES 
    ( 1000 
    , '1297 Via Cola di Rie'
@@ -581,8 +581,8 @@ INSERT INTO locations VALUES
    , 'MX'
    );
        
-%REM ****************************insert data into the DEPARTMENTS table
-%REM disable integrity constraint to EMPLOYEES to load data
+--REM ****************************insert data into the DEPARTMENTS table
+--REM disable integrity constraint to EMPLOYEES to load data
 ALTER TABLE departments 
    DISABLE CONSTRAINT dept_mgr_fk;
 INSERT INTO departments VALUES 
@@ -755,7 +755,7 @@ INSERT INTO departments VALUES
    , 1700
    );
        
-%REM ***************************insert data into the JOBS table
+--REM ***************************insert data into the JOBS table
 INSERT INTO jobs VALUES 
    ( 'AD_PRES'
    , 'President'
@@ -871,7 +871,7 @@ INSERT INTO jobs VALUES
    , 10500
    );
        
-%REM ***************************insert data into the EMPLOYEES table
+--REM ***************************insert data into the EMPLOYEES table
 INSERT INTO employees VALUES 
    ( 100
    , 'Steven'
@@ -2263,7 +2263,7 @@ INSERT INTO employees VALUES
    , 205
    , 110
    );
-%REM ********* insert data into the JOB_HISTORY table
+--REM ********* insert data into the JOB_HISTORY table
        
 INSERT INTO job_history
          VALUES (102
@@ -2331,7 +2331,7 @@ INSERT INTO job_history
    , 'AC_ACCOUNT'
    , 90
    );
-%REM enable integrity constraint to DEPARTMENTS
+--REM enable integrity constraint to DEPARTMENTS
 ALTER TABLE departments 
    ENABLE CONSTRAINT dept_mgr_fk;
 COMMIT;
@@ -2358,7 +2358,7 @@ CREATE INDEX loc_state_province_ix
 CREATE INDEX loc_country_ix
    ON locations (country_id);
 COMMIT;
-%REM procedure and statement trigger to allow dmls during business hours:
+--REM procedure and statement trigger to allow dmls during business hours:
          CREATE OR REPLACE PROCEDURE secure_dml
          IS
          BEGIN
@@ -2376,16 +2376,16 @@ CREATE OR REPLACE TRIGGER secure_employees
    END secure_employees;
    /
 ALTER TRIGGER secure_employees DISABLE;
-%REM **************************************************************************
-%REM procedure to add a row to the JOB_HISTORY table and row trigger 
-%REM to call the procedure when data is updated in the job_id or 
-%REM department_id columns in the EMPLOYEES table:
+--REM **************************************************************************
+--REM procedure to add a row to the JOB_HISTORY table and row trigger 
+--REM to call the procedure when data is updated in the job_id or 
+--REM department_id columns in the EMPLOYEES table:
 CREATE OR REPLACE PROCEDURE add_job_history
-   ( p_emp_id job_history.employee_id%type
-   , p_start_date job_history.start_date%type
-   , p_end_date job_history.end_date%type
-   , p_job_id job_history.job_id%type
-   , p_department_id job_history.department_id%type 
+   ( p_emp_id job_history.employee_id--type
+   , p_start_date job_history.start_date--type
+   , p_end_date job_history.end_date--type
+   , p_job_id job_history.job_id--type
+   , p_department_id job_history.department_id--type 
    )
    IS
    BEGIN
@@ -2432,7 +2432,7 @@ COMMENT ON COLUMN locations.country_id
          IS 'Country where an office, warehouse, or production site of a company is
          located. Foreign key to country_id column of the countries table.';
        
-%REM *********************************************
+--REM *********************************************
 COMMENT ON TABLE departments
          IS 'Departments table that shows details of departments where employees 
          work. Contains 27 rows; references with locations, employees, and job_history tables.';
@@ -2447,7 +2447,7 @@ COMMENT ON COLUMN departments.manager_id
 COMMENT ON COLUMN departments.location_id
          IS 'Location id where a department is located. Foreign key to location_id column of locations table.';
        
-%REM *********************************************
+--REM *********************************************
 COMMENT ON TABLE job_history
          IS 'Table that stores job history of the employees. If an employee 
          changes departments within the job or changes jobs within the department, 
@@ -2471,7 +2471,7 @@ COMMENT ON COLUMN job_history.job_id
 COMMENT ON COLUMN job_history.department_id
          IS 'Department id in which the employee worked in the past; foreign key to deparment_id column in the departments table';
        
-%REM *********************************************
+--REM *********************************************
 COMMENT ON TABLE countries
          IS 'country table. Contains 25 rows. References with locations table.';
 COMMENT ON COLUMN countries.country_id
@@ -2480,7 +2480,7 @@ COMMENT ON COLUMN countries.country_name
          IS 'Country name';
 COMMENT ON COLUMN countries.region_id
          IS 'Region ID for the country. Foreign key to region_id column in the departments table.';
-%REM *********************************************
+--REM *********************************************
 COMMENT ON TABLE jobs
          IS 'jobs table with job titles and salary ranges. Contains 19 rows.
          References with employees and job_history table.';
@@ -2492,7 +2492,7 @@ COMMENT ON COLUMN jobs.min_salary
          IS 'Minimum salary for a job title.';
 COMMENT ON COLUMN jobs.max_salary
          IS 'Maximum salary for a job title';
-%REM *********************************************
+--REM *********************************************
 COMMENT ON TABLE employees
          IS 'employees table. Contains 107 rows. References with departments, 
          jobs, job_history tables. Contains a self reference.';
